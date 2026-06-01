@@ -61,14 +61,6 @@ Analysis of HTTP traffic revealed a single external IP generating an abnormally 
 
 This IP address was identified as the primary threat actor and became the focus of the investigation.
 
-### Evidence
-
-<p align="center">
-  <img width="1906" height="749" alt="LFI Exploitation Evidence" src="https://github.com/user-attachments/assets/27d5cc5b-422f-4be1-be80-b362def7eb83" />
-</p>
-
-The evidence above demonstrates abnormal activity originating from the identified source IP address.
-
 ---
 
 ## Phase 2 – Vulnerability Scanning & Local File Inclusion
