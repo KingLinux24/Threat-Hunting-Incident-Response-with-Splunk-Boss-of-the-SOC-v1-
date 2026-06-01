@@ -35,9 +35,6 @@ To recreate a realistic Security Operations Center (SOC) environment, I configur
 
 ---
 
-
-# 🔎 Incident Investigation
-
 ## Phase 1 – Reconnaissance & Attacker Identification
 
 ### Objective
