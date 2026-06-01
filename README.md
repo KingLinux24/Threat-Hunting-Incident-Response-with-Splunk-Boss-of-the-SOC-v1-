@@ -23,6 +23,8 @@ To recreate a realistic Security Operations Center (SOC) environment, I configur
    cd /opt/splunk/etc/apps/
    sudo tar -xvf botsv1-attack-only.tgz
    ```
+  
+
 3. **Restarting the Splunk Service:**
    ```bash
    cd /opt/splunk/bin
@@ -56,6 +58,7 @@ The attacker discovered and exploited a Local File Inclusion (LFI) / Directory T
   | table uri, status
   ```
 * **Finding:** The attacker injected directory traversal payloads (e.g., `..%5C/..%5C/..%5C/..%5C/windows/win.ini`). The server responded with an HTTP **`200 OK`** status code, meaning the system configuration files were successfully exposed to the attacker.
+ <img width="1906" height="749" alt="Screenshot 2026-06-01 130306" src="https://github.com/user-attachments/assets/27d5cc5b-422f-4be1-be80-b362def7eb83" />
 
 ### Phase 3: Credential Access (Brute Force Attack)
 Unable to gain complete control via LFI, the attacker shifted tactics to an aggressive brute-force attack against the Joomla administrator panel.
@@ -66,7 +69,10 @@ Unable to gain complete control via LFI, the attacker shifted tactics to an aggr
   | table _time, status, client_ip, uri
   | sort _time
   ```
-* **Finding:** At exactly **2016-08-11 03:18:05 UTC**, the server response shifted from a `200` (Failed Login) to a **`303 See Other`** redirect. In Joomla, this specific redirect confirms that the attacker successfully cracked the administrator password and gained access to the backend dashboard.
+* **Finding:** At exactly **2016-08-11 03:18:05 UTC**, the server response shifted from a `200` (Failed Login) to a **`303 See Other`** redirect. In Joomla, this specific redirect confirms that the attacker successfully cracked the administrator password and gained access to the backend dashboard.*
+
+<img width="1489" height="712" alt="Screenshot 2026-06-01 130621" src="https://github.com/user-attachments/assets/dd60889f-40c7-4d47-8ac5-46b046280afa" />
+ 
 
 ### Phase 4: Persistence & Web Shell Deployment
 With administrative access secured, the attacker utilized a vulnerable third-party extension (`php-ofc-library`) to upload malicious payloads and establish permanent remote control (RCE).
@@ -79,6 +85,7 @@ With administrative access secured, the attacker utilized a vulnerable third-par
 * **Finding:** By filtering out normal Joomla traffic and focusing on newly created standalone `.php` files, I discovered two persistent Web Shells planted in the root directory:
   1. `/2WMuthHKyu.php`
   2. `/ZAk5LbgaGf.php`
+<img width="1783" height="682" alt="Screenshot 2026-06-01 132333" src="https://github.com/user-attachments/assets/d8d7ce0e-5426-4eab-b426-d4fedafe3fd4" />
 
 ---
 
