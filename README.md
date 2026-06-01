@@ -1,3 +1,41 @@
+# Comprehensive SOC Investigation Report: Splunk BOTS v1
+**Project Title:** Threat Hunting & Incident Response with Splunk (Boss of the SOC v1)  
+**Analyst:** SOC Analyst / Blue Team Engineer  
+**Environment:** Kali Linux, Splunk Enterprise  
+**Target Organization:** Wayne Enterprises (Fictional target for BOTS dataset)  
+
+---
+
+## 1. Project Overview
+The objective of this project was to deploy a local instance of Splunk Enterprise on Kali Linux, ingest the official Splunk Boss of the SOC (BOTS) Version 1 dataset, and conduct a full-scale threat hunting investigation. The investigation tracks an Advanced Persistent Threat (APT) from initial reconnaissance to the deployment of persistent web shells on a public-facing Joomla web server.
+
+---
+
+## 2. Lab Setup & Data Ingestion
+To recreate a realistic Security Operations Center (SOC) environment, I configured Splunk locally and manually ingested the attack-only dataset.
+
+### Step-by-Step Configuration:
+1. **Downloading the Dataset:** The dataset was downloaded from the official Splunk GitHub repository using the web browser to bypass large-file terminal restrictions.
+2. **Deploying the Data to Splunk:**
+   The compressed file was moved into the Splunk applications directory and extracted to automatically configure the pre-indexed data.
+   ```bash
+   sudo mv ~/Downloads/botsv1-attack-only.tgz /opt/splunk/etc/apps/
+   cd /opt/splunk/etc/apps/
+   sudo tar -xvf botsv1-attack-only.tgz
+   ```
+  
+
+3. **Restarting the Splunk Service:**
+   ```bash
+   cd /opt/splunk/bin
+   sudo ./splunk restart --run-as-root
+   ```
+4. **Validating Ingestion:**
+   Searched Splunk using `index=botsv1` with the Time Range set to **"All Time"** (Historical), successfully validating the ingestion of over 955,000 security events.
+
+---
+
+
 # 🔎 Incident Investigation
 
 ## Phase 1 – Reconnaissance & Attacker Identification
